@@ -7,7 +7,7 @@ import java.io.File
 import java.io.FileNotFoundException
 
 object Deserialization {
-    fun importEventsFromJson(context: Context): List<EventSerializable> {
+    fun importEventsFromJsonFromExternalDir(context: Context): List<EventSerializable> {
         return try {
             val file = File(context.getExternalFilesDir(null), "exported_events.json")
             if (!file.exists()) throw FileNotFoundException("File not found in external dir")

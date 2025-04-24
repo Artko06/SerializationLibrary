@@ -74,7 +74,7 @@ class ImportFileDeserializationTest {
 
     @Test
     fun importEventsFromJson_should_return_correct_events() = runBlocking {
-        val result = Deserialization.importEventsFromJson(context)
+        val result = Deserialization.importEventsFromJsonFromExternalDir(context)
 
         assertEquals(2, result.size)
         assertTrue(result.any { it.surnameContact == "Johnson" && it.notes == "Best friend" })
