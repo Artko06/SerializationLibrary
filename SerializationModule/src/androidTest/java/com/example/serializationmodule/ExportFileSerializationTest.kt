@@ -3,7 +3,7 @@ package com.example.serializationmodule
 import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.example.serializationmodule.model.EventEntity
+import com.example.serializationmodule.model.EventSerializable
 import com.example.serializationmodule.serialization.Serialization
 import junit.framework.TestCase.assertTrue
 import org.junit.After
@@ -19,7 +19,7 @@ class ExportFileSerializationTest {
 
     private lateinit var context: Context
     private val mockEvents = listOf(
-        EventEntity(
+        EventSerializable(
             id = 1,
             eventType = "BIRTHDAY",
             nameContact = "Alice",
@@ -30,7 +30,7 @@ class ExportFileSerializationTest {
             notes = "Best friend",
             image = null
         ),
-        EventEntity(
+        EventSerializable(
             id = 2,
             eventType = "ANNIVERSARY",
             nameContact = "Bob",

@@ -2,11 +2,11 @@ package com.example.serializationmodule.serialization
 
 import android.content.Context
 import android.util.Base64
-import com.example.serializationmodule.model.EventEntity
+import com.example.serializationmodule.model.EventSerializable
 import java.io.File
 
 object Serialization {
-    fun exportEventsToJsonToExternalDir(context: Context, events: List<EventEntity>) {
+    fun exportEventsToJsonToExternalDir(context: Context, events: List<EventSerializable>) {
         val externalFile = File(context.getExternalFilesDir(null), "exported_events.json")
 
         val strBuilder = StringBuilder("[\n")
@@ -32,7 +32,7 @@ object Serialization {
         externalFile.writeText(strBuilder.toString())
     }
 
-    fun exportEventsToCsvToExternalDir(context: Context, events: List<EventEntity>) {
+    fun exportEventsToCsvToExternalDir(context: Context, events: List<EventSerializable>) {
         val externalFile = File(context.getExternalFilesDir(null), "exported_events.csv")
 
         val csvBuilder = StringBuilder()

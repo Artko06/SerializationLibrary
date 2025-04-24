@@ -2,17 +2,17 @@ package com.example.serializationmodule.deserialization
 
 import android.content.Context
 import android.util.Base64
-import com.example.serializationmodule.model.EventEntity
+import com.example.serializationmodule.model.EventSerializable
 import java.io.File
 import java.io.FileNotFoundException
 
 object Deserialization {
-    fun importEventsFromJson(context: Context): List<EventEntity> {
+    fun importEventsFromJson(context: Context): List<EventSerializable> {
         return try {
             val file = File(context.getExternalFilesDir(null), "exported_events.json")
             if (!file.exists()) throw FileNotFoundException("File not found in external dir")
 
-            val result = mutableListOf<EventEntity>()
+            val result = mutableListOf<EventSerializable>()
             val jsonString = file.readText()
 
             val eventsStr = jsonString
@@ -36,7 +36,7 @@ object Deserialization {
                 else Base64.decode(mapEvent["image"], Base64.NO_WRAP)
 
                 result.add(
-                    EventEntity(
+                    EventSerializable(
                         id = mapEvent["id"]!!.toInt(),
                         eventType = mapEvent["eventType"]!!,
                         nameContact = mapEvent["nameContact"]!!,
@@ -57,7 +57,7 @@ object Deserialization {
         }
     }
 
-    fun importEventsFromCsvFromExternalDir(context: Context): List<EventEntity> {
+    fun importEventsFromCsvFromExternalDir(context: Context): List<EventSerializable> {
         return try {
             val file = File(context.getExternalFilesDir(null), "exported_events.csv")
             if (!file.exists()) throw FileNotFoundException("File not found in external dir")
@@ -65,7 +65,7 @@ object Deserialization {
             val lines = file.readLines()
             if (lines.isEmpty()) return emptyList()
 
-            val events = mutableListOf<EventEntity>()
+            val events = mutableListOf<EventSerializable>()
 
             for (line in lines.drop(1)) { // Skip title
                 val tokens = line.split(",")
@@ -84,7 +84,7 @@ object Deserialization {
                 val imageBytes = if (imageBase64.isNotBlank()) Base64.decode(imageBase64, Base64.NO_WRAP) else null
 
                 events.add(
-                    EventEntity(
+                    EventSerializable(
                         id = id.toInt(),
                         eventType = eventType,
                         nameContact = nameContact,

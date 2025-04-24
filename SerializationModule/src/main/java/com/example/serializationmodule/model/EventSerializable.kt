@@ -1,6 +1,6 @@
 package com.example.serializationmodule.model
 
-data class EventEntity(
+data class EventSerializable(
     val id: Int,
     val eventType: String,
     val nameContact: String,
@@ -15,7 +15,7 @@ data class EventEntity(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as EventEntity
+        other as EventSerializable
 
         if (id != other.id) return false
         if (yearMatter != other.yearMatter) return false
