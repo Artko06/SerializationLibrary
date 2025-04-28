@@ -1,19 +1,25 @@
 package com.example.serializationmodule.deserialization
 
 import android.content.Context
+import android.net.Uri
 import android.util.Base64
+import android.webkit.MimeTypeMap
 import com.example.serializationmodule.model.EventSerializable
-import java.io.File
 import java.io.FileNotFoundException
 
 object Deserialization {
-    fun importEventsFromJsonFromExternalDir(context: Context): List<EventSerializable> {
+    fun importEventsFromJson(context: Context, uri: Uri): List<EventSerializable> {
         return try {
-            val file = File(context.getExternalFilesDir(null), "exported_events.json")
-            if (!file.exists()) throw FileNotFoundException("File not found in external dir")
+            val inputStream = context.contentResolver.openInputStream(uri)
+                ?: throw FileNotFoundException("Unable to open InputStream for Uri")
+
+            val extension = MimeTypeMap.getFileExtensionFromUrl(uri.toString())
+            if (extension != "json") {
+                throw IllegalArgumentException("Invalid file extension: expected .json")
+            }
 
             val result = mutableListOf<EventSerializable>()
-            val jsonString = file.readText()
+            val jsonString = inputStream.bufferedReader().use { it.readText() }
 
             val eventsStr = jsonString
                 .trim()
@@ -57,12 +63,17 @@ object Deserialization {
         }
     }
 
-    fun importEventsFromCsvFromExternalDir(context: Context): List<EventSerializable> {
+    fun importEventsFromCsv(context: Context, uri: Uri): List<EventSerializable> {
         return try {
-            val file = File(context.getExternalFilesDir(null), "exported_events.csv")
-            if (!file.exists()) throw FileNotFoundException("File not found in external dir")
+            val inputStream = context.contentResolver.openInputStream(uri)
+                ?: throw FileNotFoundException("Unable to open InputStream for Uri")
 
-            val lines = file.readLines()
+            val extension = MimeTypeMap.getFileExtensionFromUrl(uri.toString())
+            if (extension != "csv") {
+                throw IllegalArgumentException("Invalid file extension: expected .csv")
+            }
+
+            val lines = inputStream.bufferedReader().readLines()
             if (lines.isEmpty()) return emptyList()
 
             val events = mutableListOf<EventSerializable>()
