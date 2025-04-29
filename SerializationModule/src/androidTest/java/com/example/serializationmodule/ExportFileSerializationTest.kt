@@ -26,7 +26,6 @@ class ExportFileSerializationTest {
             surnameContact = "Johnson",
             originalDate = LocalDate.of(1990, 1, 1).toString(),
             yearMatter = true,
-            nextDate = LocalDate.of(2025, 1, 1).toString(),
             notes = "Best friend",
             image = null
         ),
@@ -37,7 +36,6 @@ class ExportFileSerializationTest {
             surnameContact = "Smith",
             originalDate = LocalDate.of(1995, 5, 15).toString(),
             yearMatter = false,
-            nextDate = LocalDate.of(2025, 5, 15).toString(),
             notes = "Work",
             image = null
         )

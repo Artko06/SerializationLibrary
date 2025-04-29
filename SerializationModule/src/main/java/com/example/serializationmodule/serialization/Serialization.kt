@@ -19,7 +19,6 @@ object Serialization {
             strBuilder.append(" ".repeat(4) + "\"surnameContact\": \"${event.surnameContact ?: ""}\",\n")
             strBuilder.append(" ".repeat(4) + "\"originalDate\": \"${event.originalDate}\",\n")
             strBuilder.append(" ".repeat(4) + "\"yearMatter\": ${event.yearMatter},\n")
-            strBuilder.append(" ".repeat(4) + "\"nextDate\": \"${event.nextDate}\",\n")
             strBuilder.append(" ".repeat(4) + "\"notes\": \"${event.notes ?: ""}\",\n")
             val imageBase64 = event.image?.let { Base64.encodeToString(it, Base64.NO_WRAP) } ?: ""
             strBuilder.append(" ".repeat(4) + "\"image\": \"${imageBase64}\"\n")
@@ -38,13 +37,12 @@ object Serialization {
         val csvBuilder = StringBuilder()
 
         csvBuilder.appendLine(
-            "id," +
+                    "id," +
                     "eventType," +
                     "nameContact," +
                     "surnameContact," +
                     "originalDate," +
                     "yearMatter," +
-                    "nextDate," +
                     "notes," +
                     "image"
         )
@@ -59,7 +57,6 @@ object Serialization {
                 event.surnameContact ?: "",
                 event.originalDate,
                 event.yearMatter,
-                event.nextDate,
                 event.notes ?: "",
                 base64Image
             ).joinToString(separator = ",")

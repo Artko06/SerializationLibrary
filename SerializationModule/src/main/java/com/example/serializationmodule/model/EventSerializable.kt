@@ -7,7 +7,6 @@ data class EventSerializable(
     val surnameContact: String?,
     val originalDate: String,
     val yearMatter: Boolean,
-    val nextDate: String,
     val notes: String? = null,
     val image: ByteArray? = null
 ) {
@@ -23,7 +22,6 @@ data class EventSerializable(
         if (nameContact != other.nameContact) return false
         if (surnameContact != other.surnameContact) return false
         if (originalDate != other.originalDate) return false
-        if (nextDate != other.nextDate) return false
         if (notes != other.notes) return false
         if (!image.contentEquals(other.image)) return false
 
@@ -37,7 +35,6 @@ data class EventSerializable(
         result = 31 * result + nameContact.hashCode()
         result = 31 * result + (surnameContact?.hashCode() ?: 0)
         result = 31 * result + originalDate.hashCode()
-        result = 31 * result + nextDate.hashCode()
         result = 31 * result + (notes?.hashCode() ?: 0)
         result = 31 * result + (image?.contentHashCode() ?: 0)
         return result

@@ -29,9 +29,9 @@ class ImportFileDeserializationTest {
         val csvFile = File(context.getExternalFilesDir(null), "exported_events.csv").apply {
             writeText(
                 """
-                id,eventType,nameContact,surnameContact,originalDate,yearMatter,nextDate,notes,image
-                1,BIRTHDAY,Alice,Johnson,1990-01-01,true,2025-01-01,Best friend,
-                2,ANNIVERSARY,Bob,Smith,1995-05-15,false,2025-05-15,Work,
+                id,eventType,nameContact,surnameContact,originalDate,yearMatter,notes,image
+                1,BIRTHDAY,Alice,Johnson,1990-01-01,true,Best friend,
+                2,ANNIVERSARY,Bob,Smith,1995-05-15,false,Work,
                 """.trimIndent()
             )
         }
@@ -46,7 +46,6 @@ class ImportFileDeserializationTest {
                         "surnameContact": "Johnson",
                         "originalDate": "1990-01-01",
                         "yearMatter": true,
-                        "nextDate": "2025-01-01",
                         "notes": "Best friend",
                         "image": null
                     },
@@ -57,7 +56,6 @@ class ImportFileDeserializationTest {
                         "surnameContact": "Smith",
                         "originalDate": "1995-05-15",
                         "yearMatter": false,
-                        "nextDate": "2025-05-15",
                         "notes": "Work",
                         "image": null
                     }

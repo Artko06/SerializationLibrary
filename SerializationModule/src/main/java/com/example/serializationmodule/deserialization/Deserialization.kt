@@ -49,7 +49,6 @@ object Deserialization {
                         surnameContact = mapEvent["surnameContact"],
                         originalDate = mapEvent["originalDate"]!!,
                         yearMatter = mapEvent["yearMatter"]!!.toBoolean(),
-                        nextDate = mapEvent["nextDate"]!!,
                         notes = mapEvent["notes"],
                         image = imageBytes
                     )
@@ -81,7 +80,7 @@ object Deserialization {
             for (line in lines.drop(1)) { // Skip title
                 val tokens = line.split(",")
 
-                if (tokens.size < 9) continue // Skip empty strings
+                if (tokens.size < 8) continue // Skip empty strings
 
                 val id = tokens[0]
                 val eventType = tokens[1]
@@ -89,9 +88,8 @@ object Deserialization {
                 val surnameContact = tokens[3]
                 val originalDate = tokens[4]
                 val yearMatter = tokens[5].toBoolean()
-                val nextDate = tokens[6]
-                val notes = tokens[7]
-                val imageBase64 = tokens[8]
+                val notes = tokens[6]
+                val imageBase64 = tokens[7]
                 val imageBytes = if (imageBase64.isNotBlank()) Base64.decode(imageBase64, Base64.NO_WRAP) else null
 
                 events.add(
@@ -102,7 +100,6 @@ object Deserialization {
                         surnameContact = surnameContact,
                         originalDate = originalDate,
                         yearMatter = yearMatter,
-                        nextDate = nextDate,
                         notes = notes,
                         image = imageBytes
                     )
