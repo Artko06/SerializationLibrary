@@ -43,7 +43,7 @@ object Deserialization {
 
                 result.add(
                     EventSerializable(
-                        id = mapEvent["id"]!!.toInt(),
+                        id = mapEvent["id"]!!.toLong(),
                         eventType = mapEvent["eventType"]!!,
                         nameContact = mapEvent["nameContact"]!!,
                         surnameContact = mapEvent["surnameContact"],
@@ -94,7 +94,7 @@ object Deserialization {
 
                 events.add(
                     EventSerializable(
-                        id = id.toInt(),
+                        id = id.toLong(),
                         eventType = eventType,
                         nameContact = nameContact,
                         surnameContact = surnameContact,

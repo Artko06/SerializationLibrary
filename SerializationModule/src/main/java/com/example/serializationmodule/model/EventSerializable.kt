@@ -1,7 +1,7 @@
 package com.example.serializationmodule.model
 
 data class EventSerializable(
-    val id: Int,
+    val id: Long,
     val eventType: String,
     val nameContact: String,
     val surnameContact: String?,
@@ -29,7 +29,7 @@ data class EventSerializable(
     }
 
     override fun hashCode(): Int {
-        var result = id
+        var result = id.hashCode()
         result = 31 * result + yearMatter.hashCode()
         result = 31 * result + eventType.hashCode()
         result = 31 * result + nameContact.hashCode()
